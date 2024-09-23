@@ -1,0 +1,8 @@
+create database deparment;
+use deparment;
+create table deparments(deparment_id int primary key, salary_data date default '2024-09-01', 
+age int check(age>=18) , deparment_name varchar(40) not null , 
+phonenumber int unique not null);
+insert into deparments(deparment_id , age , deparment_name , phonenumber) value (4, 20 , 'BCA' , 1221,9787), (8, 30 , 'BSC' , 12020 ); 
+select * from  deparments;
+update deparments set phonenumber=123242 where deparment_id=1;
