@@ -55,4 +55,7 @@ select Sales.* from Sales;
 select Products.ProductName , (Products.Price * Sales.Quantity) as totalamount 
   from Products left join Sales on Products.ProductID = Sales.ProductID;
 
+select Products.ProductName , Sales.SaleDate as totalamount 
+  from Products left join Sales on Products.ProductID = Sales.ProductID;
+
 
