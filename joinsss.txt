@@ -1,0 +1,43 @@
+SELECT c.CustomerID, c.Name, COUNT(o.OrderID) AS TotalOrders
+FROM Customers c
+LEFT JOIN Orders o ON c.CustomerID = o.CustomerID
+GROUP BY c.CustomerID, c.Name;
+
+-----------------------
+SELECT AVG(COALESCE(TotalAmount, 0)) AS AverageOrderValue
+FROM Orders;
+----------------------
+SELECT p.Category, SUM(od.Quantity) AS TotalSales
+FROM Products p
+JOIN OrderDetails od ON p.ProductID = od.ProductID
+GROUP BY p.Category;
+----------------------
+SELECT Name, TotalSpending
+FROM Customers
+ORDER BY TotalSpending DESC
+LIMIT 5;
+----------------------
+
+SELECT c.CustomerID, c.Name
+FROM Customers c
+LEFT JOIN Orders o ON c.CustomerID = o.CustomerID
+WHERE o.OrderDate IS NULL OR o.OrderDate < DATE_SUB(CURDATE(), INTERVAL 1 YEAR);
+----------------------
+SELECT p.ProductName, SUM(od.Quantity) AS TotalQuantitySold
+FROM Products p
+JOIN OrderDetails od ON p.ProductID = od.ProductID
+GROUP BY p.ProductID, p.ProductName
+HAVING SUM(od.Quantity) < (SELECT AVG(Quantity) FROM OrderDetails);
+----------------------
+SELECT p.ProductName, SUM(od.Quantity) AS TotalQuantitySold
+FROM Products p
+JOIN OrderDetails od ON p.ProductID = od.ProductID
+GROUP BY p.ProductID, p.ProductName
+HAVING SUM(od.Quantity) > 100; -- Example threshold
+----------------------
+SELECT SUM(COALESCE(TotalAmount, 0)) AS TotalOrderAmount,
+       AVG(COALESCE(TotalAmount, 0)) AS AverageOrderAmount
+FROM Orders;
+----------------------
+
+
