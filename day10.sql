@@ -44,7 +44,7 @@ select department_id from employees e
 where exists (select 1 from Employees where department_id= e.department_id and salary>60000);
 
 
---  5. Subquery with BETWEEN: Find employees whose salary is between the average salary and
+--  5. e with BETWEEN: Find employees whose salary is between the average salary and
 --  the highest salary in the company.
 
 select employee_id from Employees where salary between (select vag(salary) from Employees) and (select max(salary) from Employees);
